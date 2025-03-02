@@ -8,6 +8,7 @@ body {
     justify-items: center;
     align-items: center;
     flex-direction: column;
-    padding: 20px; margin: 20px;
-    border: 2px #afafaf solid; border-radius: 8px;
+    padding: 20px; 
+    margin: 20px;
+    border: 1px #afafaf solid; border-radius: 8px;
 }
