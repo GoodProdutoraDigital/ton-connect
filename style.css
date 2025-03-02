@@ -1,0 +1,13 @@
+body {
+    width: 100%px;
+    margin: 0 auto;
+    font-family: Roboto, sans-serif;
+}
+.section {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px; margin: 20px;
+    border: 2px #afafaf solid; border-radius: 8px;
+}
