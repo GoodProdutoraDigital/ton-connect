@@ -26,13 +26,33 @@
         async function connectToWallet() {
             const connectedWallet = await tonConnectUI.connectWallet();
             // Do something with connectedWallet if needed
-            console.log(connectedWallet);
+            console.log(connectedWallet.account.address);
         }
+
+        // if (connectedWallet) {
+        //   const rawAddress = status.account.address;
+        // //   console.log(rawAddress);
+        //   const apiUrl = `https://toncenter.com/api/v2/packAddress?address=${encodeURIComponent(
+        //     rawAddress
+        //   )}`;
+        //   fetch(apiUrl,{
+        //     method:"GET",
+        //     headers:{
+        //         accept:"application/json",
+        //     }
+        //   }).then((response)=> response.json()).then((data)=>{
+        //     if (data.ok) {
+        //         // console.log(data.result);
+        //         addr.innerHTML = data.result;
+        //     }
+        //   })
+        // }
 
         // Call the function
         connectToWallet().catch(error => {
             console.error("Error connecting to wallet:", error);
         });
+        
     </script>
 </body>
 </html>
