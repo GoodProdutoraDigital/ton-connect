@@ -27,24 +27,21 @@
             const connectedWallet = await tonConnectUI.connectWallet();
             // Do something with connectedWallet if needed
             console.log(connectedWallet.account.address);
-        }
 
-        const rawAddress = connectedWallet.account.address;
+            const rawAddress = connectedWallet.account.address;
     
-        const apiUrl = `https://toncenter.com/api/v2/packAddress?address=${encodeURIComponent(
-        rawAddress
-        )}`;
-        fetch(apiUrl,{
-        method:"GET",
-        headers:{
-            accept:"application/json",
+            const apiUrl = `https://toncenter.com/api/v2/packAddress?address=${encodeURIComponent(rawAddress)}`;
+            fetch(apiUrl,{
+            method:"GET",
+            headers:{
+                accept:"application/json",
+            }
+            }).then((response)=> response.json()).then((data)=>{
+                if (data.ok) {
+                    console.log(data.result);
+                }
+            })
         }
-        }).then((response)=> response.json()).then((data)=>{
-        if (data.ok) {
-            console.log(data.result);
-        }
-        })
-        
 
         // Call the function
         connectToWallet().catch(error => {
