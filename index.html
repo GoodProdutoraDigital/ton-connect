@@ -1,76 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TON CONNECT WALLET</title>
-  </head>
-<style>
-  body{
-    width: 100%;
-    height: 100vh;
-    background: #000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    grid-area: 4em;
-    justify-content: center;
-    overflow: hidden;
-  }
-  button{
-    width: 200px;
-    height: 50px;
-    border-radius: 5px;
-    p{
-      color: #fff;
-    }
-  }
-</style>
-  <body>
-    <button onclick="connectWallet()">CONNECT WALLET</button>
-  </body>
-  <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
-  <script>
-    const connector = new TonConnectSDK.TonConnect({
-      manifestUrl:
-        "https://raw.githubusercontent.com/nuex001/Tonkeepermanifest/main/tonconnect-manifest.json",
-    });
-    const connectWallet = () => {
-      const walletConnectionSource = {
-        universalLink: "https://app.tonkeeper.com/ton-connect",
-        bridgeUrl: "https://bridge.tonapi.io/bridge",
-      };
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
 
-      const universalLink = connector.connect(walletConnectionSource);
-      window.open(universalLink, "_blank");
-    };
-    connector.onStatusChange((status) => {
-      console.log("Connection status changed:", status);
-      if (status) {
-        const rawAddress = status.account.address;
-        // Convert raw address to base64 format
-        const apiUrl = `https://toncenter.com/api/v2/packAddress?address=${encodeURIComponent(
-          rawAddress
-        )}`;
-        fetch(apiUrl, {
-          method: "GET",
-          headers: {
-            accept: "application/json",
-          },
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.ok) {
-              console.log("Packed Address:", data.result);
-            } else {
-              console.error("Error:", data);
-            }
-          })
-          .catch((error) => console.error("Fetch Error:", error));
+    <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+    <title>TON Site</title>
+</head>
+<body>
+    
+    <div class="section" id="tonconnect-buttons">
+        <h1>Hello TON Blockchain!</h1>
+        <div id="ton-connect"></div>
+    </div>
+    
+    <script>
+        const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+            manifestUrl: 'https://goodprodutoradigital.github.io/ton-connect/tonconnect-manifest.json',
+            buttonRootId: 'ton-connect'
+        });
+    </script>
 
-        // Display formatted address in the UI
-        document.body.innerHTML += `<p>Connected Wallet Address: ${base64Address}</p>`;
-      }
-    });
-  </script>
+    <script>
+        async function connectToWallet() {
+            const connectedWallet = await tonConnectUI.connectWallet();
+            // Do something with connectedWallet if needed
+            console.log(connectedWallet);
+        }
+
+        // Call the function
+        connectToWallet().catch(error => {
+            console.error("Error connecting to wallet:", error);
+        });
+    </script>
+</body>
 </html>
