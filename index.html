@@ -33,7 +33,7 @@
   <script>
     const connector = new TonConnectSDK.TonConnect({
       manifestUrl:
-        "https://goodprodutoradigital.github.io/ton-connect/tonconnect-manifest.json",
+        "https://raw.githubusercontent.com/nuex001/Tonkeepermanifest/main/tonconnect-manifest.json",
     });
     const connectWallet = () => {
       const walletConnectionSource = {
@@ -74,44 +74,3 @@
     });
   </script>
 </html>
-
-<!-- 
-  <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
-  <script>
-    const connector = new TonConnectSDK.TonConnect({
-      manifestUrl:
-        "https://raw.githubusercontent.com/nuex001/Tonkeepermanifest/main/tonconnect-manifest.json",
-    });
-    const addr = document.querySelector("#addr");
-
-    const connectWallet = () => {
-      const walletConnectionSource = {
-        universalLink: "https://app.tonkeeper.com/ton-connect",
-        bridgeUrl: "https://bridge.tonapi.io/bridge",
-      };
-      const universalLink = connector.connect(walletConnectionSource);
-      window.open(universalLink, "_blank");
-
-      connector.onStatusChange((status) => {
-        console.log("Connection status changed:", status);
-        if (status) {
-          const rawAddress = status.account.address;
-        //   console.log(rawAddress);
-          const apiUrl = `https://toncenter.com/api/v2/packAddress?address=${encodeURIComponent(
-            rawAddress
-          )}`;
-          fetch(apiUrl,{
-            method:"GET",
-            headers:{
-                accept:"application/json",
-            }
-          }).then((response)=> response.json()).then((data)=>{
-            if (data.ok) {
-                // console.log(data.result);
-                addr.innerHTML = data.result;
-            }
-          })
-        }
-      });
-    };
-  </script>
